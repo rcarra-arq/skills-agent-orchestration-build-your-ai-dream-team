@@ -1,0 +1,361 @@
+:root {
+  /* Color tokens */
+  --pp-bg: #F6F8FA;
+  --pp-surface: #FFFFFF;
+  --pp-primary: #0066FF;
+  --pp-accent: #7C5DFF;
+  --pp-text: #0B1A2B;
+  --pp-muted: #6B7A8A;
+  --pp-success: #1EAD66;
+  --pp-warning: #FF9F1A;
+  --pp-danger: #E53E3E;
+  --pp-border: #E6EDF3;
+  --pp-shadow: 0 6px 20px rgba(11, 26, 43, 0.08);
+  --pp-focus: #FFB84D;
+
+  /* Typography */
+  --type-h1-size: 20px;
+  --type-h1-line: 28px;
+  --type-h2-size: 16px;
+  --type-h2-line: 22px;
+  --type-body-size: 14px;
+  --type-body-line: 20px;
+  --type-meta-size: 12px;
+  --radius: 8px;
+
+  /* Layout */
+  --container-max: 1200px;
+  --gutter-sm: 16px;
+  --gutter-lg: 24px;
+}
+
+/* Basic reset & foundation */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--pp-bg);
+  color: var(--pp-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Utility: visually hidden (screen reader only) */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+}
+
+/* Dashboard container */
+.dashboard {
+  max-width: var(--container-max);
+  margin: 24px auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Header */
+.dashboard__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.dashboard__header .title {
+  font-size: var(--type-h1-size);
+  line-height: var(--type-h1-line);
+  font-weight: 600;
+  margin: 0;
+  color: var(--pp-text);
+}
+
+/* Controls row */
+.dashboard__controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Inputs and buttons */
+.input {
+  border: 1px solid var(--pp-border);
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: var(--type-body-size);
+  color: var(--pp-text);
+  min-height: 40px;
+}
+.input:focus,
+.input:focus-visible {
+  outline: 3px solid var(--pp-focus);
+  outline-offset: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--pp-primary);
+  font-size: var(--type-body-size);
+}
+.btn--primary {
+  background: var(--pp-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.12);
+}
+.btn:focus-visible,
+.btn--primary:focus-visible {
+  outline: 3px solid var(--pp-focus);
+  outline-offset: 2px;
+}
+
+/* Project list grid */
+.dashboard__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 8px;
+}
+
+/* Project card */
+.project-card {
+  background: var(--pp-surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--pp-shadow);
+  border: 1px solid var(--pp-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  min-height: 160px;
+}
+
+/* Hover / focus affordance with reduced-motion respect */
+@media (prefers-reduced-motion: no-preference) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(11, 26, 43, 0.12);
+  }
+}
+
+/* Card header */
+.project-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.project-card__title {
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line);
+  font-weight: 600;
+  color: var(--pp-text);
+  margin: 0;
+}
+
+/* Status badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: var(--type-meta-size);
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+.badge--success { background: var(--pp-success); }
+.badge--warning { background: var(--pp-warning); color: #081018;}
+.badge--danger  { background: var(--pp-danger); }
+.badge--neutral { background: #8A98A6; }
+
+/* Card meta */
+.project-card__meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--pp-muted);
+  font-size: var(--type-meta-size);
+}
+
+/* Description */
+.project-card__description {
+  color: var(--pp-text);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer row */
+.project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Priority pill / left accent */
+.project-card__priority,
+.priority {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+}
+.priority--high { background: var(--pp-danger); }
+.priority--medium { background: var(--pp-warning); color: #081018; }
+.priority--low { background: var(--pp-success); }
+
+/* Small progress bar (custom visual, accessible attributes expected in markup) */
+.project-card__progress {
+  height: 8px;
+  background: var(--pp-border);
+  border-radius: 999px;
+  overflow: hidden;
+  width: 160px;
+  flex: 1 1 auto;
+  margin-left: 12px;
+}
+.project-card__progress > .progress__value {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pp-primary), var(--pp-accent));
+  width: 40%; /* runtime-adjusted */
+  transition: width 300ms ease;
+}
+
+/* Avatars */
+.avatars {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #D9E6FF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--pp-primary);
+  border: 2px solid var(--pp-surface);
+}
+
+/* Empty state */
+.dashboard .empty {
+  text-align: center;
+  padding: 36px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(124,93,255,0.04), rgba(0,102,255,0.02));
+  color: var(--pp-muted);
+}
+
+/* Focus states for interactive card areas (card can be actionable) */
+.project-card:focus-within {
+  outline: 3px solid rgba(255, 184, 77, 0.12);
+  outline-offset: 2px;
+}
+
+/* Make sure buttons and links inside card are accessible */
+.project-card a,
+.project-card button {
+  border: none;
+  background: transparent;
+  color: var(--pp-primary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+}
+.project-card a:focus,
+.project-card button:focus {
+  outline: 3px solid var(--pp-focus);
+  outline-offset: 2px;
+}
+
+/* Muted text utility */
+.muted {
+  color: var(--pp-muted);
+}
+
+/* Responsive adjustments */
+@media (max-width: 599px) {
+  .dashboard {
+    padding: 12px;
+    margin: 12px auto;
+  }
+  .dashboard__controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .dashboard__list {
+    gap: 12px;
+  }
+  .project-card {
+    padding: 12px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .dashboard {
+    padding: 16px;
+  }
+  .dashboard__controls {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (min-width: 900px) {
+  .dashboard {
+    padding: 20px;
+  }
+  .dashboard__controls {
+    gap: 16px;
+  }
+}
+
+/* Utility states */
+.is-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

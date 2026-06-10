@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Project Pulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Project Pulse</h1>
+    <p id="subtitle">A lightweight dashboard of active projects</p>
+  </header>
+
+  <main>
+    <section id="projects" role="list" aria-label="Project list">
+      <p>Loading projects…</p>
+    </section>
+  </main>
+
+  <footer>
+    <p aria-hidden="true">© Project Pulse</p>
+  </footer>
+
+  <script>
+    (function () {
+      const container = document.getElementById('projects');
+
+      fetch('project-data.json')
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.json();
+        })
+        .then(data => {
+          const list = Array.isArray(data.projects) ? data.projects : [];
+          renderProjects(list);
+        })
+        .catch(err => {
+          container.innerHTML = '<p>Could not load project data.</p>';
+          console.error(err);
+        });
+
+      function renderProjects(projects) {
+        container.innerHTML = '';
+        if (!projects.length) {
+          container.innerHTML = '<p>No projects available.</p>';
+          return;
+        }
+
+        projects.forEach(p => {
+          const card = document.createElement('article');
+          card.className = 'project-card';
+          card.setAttribute('role', 'listitem');
+          card.setAttribute('aria-label', `Project ${p.name} owned by ${p.owner}`);
+
+          // Minimal visible markup showing required fields
+          card.innerHTML = `
+            <h2>${'${p.name}'.replace(/\$/g,'$')}</h2>
+            <p><strong>Owner:</strong> ${'${p.owner}'.replace(/\$/g,'$')}</p>
+            <p><strong>Status:</strong> ${'${p.status}'.replace(/\$/g,'$')}</p>
+            <p><strong>Recent Activity:</strong> ${'${p.recentActivity}'.replace(/\$/g,'$')}</p>
+            <p><strong>Priority:</strong> ${'${p.priority}'.replace(/\$/g,'$')}</p>
+          `;
+
+          container.appendChild(card);
+        });
+      }
+
+      function escapeHtml(str) {
+        if (typeof str !== 'string') return '';
+        return str.replace(/[&<>"']/g, ch =>
+          ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])
+        );
+      }
+    })();
+  </script>
+</body>
+</html>

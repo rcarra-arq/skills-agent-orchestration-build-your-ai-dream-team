@@ -1,0 +1,32 @@
+{
+  "projects": [
+    {
+      "name": "Onboarding Portal",
+      "owner": "Aisha Khan",
+      "status": "In Progress",
+      "recentActivity": "Deployed staging build; QA testing started",
+      "priority": "High"
+    },
+    {
+      "name": "Marketing Website Refresh",
+      "owner": "Luis Garcia",
+      "status": "Planning",
+      "recentActivity": "Kickoff meeting scheduled; wireframes under review",
+      "priority": "Medium"
+    },
+    {
+      "name": "Data Warehouse Migration",
+      "owner": "Chen Wei",
+      "status": "Blocked",
+      "recentActivity": "Waiting on vendor credentials",
+      "priority": "Critical"
+    },
+    {
+      "name": "Mobile App Feature Sprint",
+      "owner": "Riley Morgan",
+      "status": "In Progress",
+      "recentActivity": "Feature branch merged; beta testers invited",
+      "priority": "High"
+    }
+  ]
+}
